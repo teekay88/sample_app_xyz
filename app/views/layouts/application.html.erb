@@ -6,8 +6,13 @@
   <%# Fixes navbar at top, inverse := dark navbar  %>
   <%= render 'layouts/header' %>
     <div class="container">
+     <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+      <% end %>
       <%= yield %>
   <%=  render 'layouts/footer' %>
+  <!--built-in debug method and parms variable-->
+  <%= debug(params) if Rails.env.development? %>
     </div>
   </body>
 </html>
