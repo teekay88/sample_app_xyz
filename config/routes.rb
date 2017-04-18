@@ -14,9 +14,16 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  resources :users
+  #adding following and followers actions to the Users controller
+  #makes URL like users/1/following and users/1/followers
+  resources :users do
+    member do 
+      get:following, :followers
+      end    
+  end
   resources :account_activations, only: [:edit]
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
+  resources :relationships,       only: [:create, :destroy]
 end
